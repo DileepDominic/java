@@ -1,0 +1,62 @@
+#Funcation to finding path between capital and each city
+def get_path(tree, capital, city, path=[]):
+    path = path + [capital]
+    if capital == city:
+        return path
+    for i in tree[capital]:
+        if i not in path:
+            new_path = get_path(tree, i, city, path)
+            if new_path:
+                return new_path
+    return None
+
+#No of cities
+print("Enter no of cities : ")
+M = int(input())
+
+#Check limit of cities
+if(M <0 or M>100000):
+    print("No of cities are outside specified limit [1..100000]")
+    exit(1)
+
+#T array to hold cities
+#T=[9,1,4,9,0,4,8,9,0,1]
+
+#'''
+T=[]
+for i in range(M):
+    
+    print("Enter T[",i,"].x:")
+    x = int(input())
+    
+    if(x <0 or x>M-1):
+        print("No element are outside specified limit [1..",M-1,"]")
+        exit(1)
+    else:
+        T.append(x)
+#'''
+
+#Converting array to dictionary    
+tree = { k:[] for k in range(M)}
+  
+capital=0
+
+for i in range(M):
+    if(i == T[i]): 
+        capital = i  #Finding capital
+        tree[i].append(T[i])
+    else:
+        tree[i].append(T[i])
+        tree[T[i]].append(i)
+
+
+#Decalre a new array to hold number of cities positioned at each distance 1,2, …, M-1
+R = [0 for i in range(M-1)]
+
+for city in range(M):
+    path_list = get_path(tree, capital, city)
+    distance = len(path_list) -1  
+    if(distance>0):
+        R[distance - 1] = R[distance - 1] + 1
+
+print(R)
