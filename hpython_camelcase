@@ -1,0 +1,17 @@
+#!/bin/python3
+
+import sys
+
+def camelcase(s):
+    count = 0
+    for i in s:
+        if(i.isupper()):
+            count = count + 1
+    return (count+1)
+
+if __name__ == "__main__":
+    s = input().strip()
+    if(len(s)<0 or len(s)>10**5):
+        exit(0)
+    result = camelcase(s)
+    print(result)
