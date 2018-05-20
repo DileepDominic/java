@@ -19,8 +19,24 @@ class Node {
 
 public class source {
 	
+  static int max(int a,int b){
+        if(a>b){
+            return a;
+        }
+        else{
+          return b;  
+        } 
+        
+    }
 	static int height(Node root) {
-      	return 1;
+      	if(root!=null){
+            return (1 + max(height(root.left),height(root.right)));
+        }
+        else {
+            return -1;
+        }
+        
+        
     }
 
 	public static Node insert(Node root, int data) {
